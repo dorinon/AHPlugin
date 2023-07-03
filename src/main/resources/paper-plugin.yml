@@ -1,0 +1,4 @@
+name: ah
+version: '${project.version}'
+main: plugin.paper.ah.Ah
+api-version: '1.19'
