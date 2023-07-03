@@ -1,4 +1,4 @@
-package plugin.paper.ah;
+package plugin.paper.marketplace;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,6 +12,5 @@ public final class Ah extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
     }
 }
