@@ -5,26 +5,71 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import plugin.paper.marketplace.offers.transctions.types.Auction;
+import plugin.paper.marketplace.Ah;
+import plugin.paper.marketplace.offers.transaction.types.Auction;
+import plugin.paper.marketplace.offers.transaction.types.BulkTransaction;
+import plugin.paper.marketplace.offers.transaction.types.FixedPrice;
+
+import java.sql.SQLException;
 
 public class Database {
 
-    String url = "jdbc:sqlite:src/main/resources/Database/MarketPlace";
-    private Dao<Auction, Integer> AuctionDao;
+    private static String url = "jdbc:sqlite:D:/Documents/dor/coding/sqlite/marketplace";
+    private static Dao<Auction, Integer> auctionDao;
+    private static Dao<FixedPrice, Integer> fixedPriceDao;
+    private static Dao<BulkTransaction, Integer> BulkDao;
 
-    public Database() {
-
+    public static ConnectionSource getConnectionSource() {
+        return connectionSource;
     }
 
-    public void setup(String name) throws Exception {
+    private static ConnectionSource connectionSource = null;
 
-        try (ConnectionSource connectionSource = new JdbcConnectionSource(url)) {
+    public static void init() {
+        System.out.println(url);
+        connect();
+        setupTables();
+    }
 
-            AuctionDao = DaoManager.createDao(connectionSource, Auction.class);
-            TableUtils.createTable(connectionSource, Auction.class);
-
-        } catch (Exception e) {
-            System.out.println("Error setting up database");
+    private static void connect(){
+        try {
+            connectionSource = new JdbcConnectionSource(url);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
+
+    private static void setupTables() {
+        try {
+            TableUtils.createTableIfNotExists(connectionSource, Auction.class);
+            TableUtils.createTableIfNotExists(connectionSource, FixedPrice.class);
+            TableUtils.createTableIfNotExists(connectionSource, BulkTransaction.class);
+
+            auctionDao = DaoManager.lookupDao(connectionSource, Auction.class);
+            fixedPriceDao = DaoManager.lookupDao(connectionSource, FixedPrice.class);
+            BulkDao = DaoManager.lookupDao(connectionSource, BulkTransaction.class);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error setting up tables");
+        }
+    }
+    public static void disconnect(){
+        try {
+            connectionSource.close();
+        } catch (Exception e) {
+            throw new RuntimeException("Error disconnecting from database");
+        }
+    }
+
+    public static Dao<Auction, Integer> getAuctionDao() {
+        return auctionDao;
+    }
+
+    public static Dao<FixedPrice, Integer> getFixedPriceDao() {
+        return fixedPriceDao;
+    }
+
+    public static Dao<BulkTransaction, Integer> getBulkDao() {
+        return BulkDao;
+    }
+
 }

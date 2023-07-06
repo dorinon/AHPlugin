@@ -1,11 +1,8 @@
-package plugin.paper.marketplace.offers.transctions.types;
+package plugin.paper.marketplace.offers.transaction.types;
 
 import com.j256.ormlite.table.DatabaseTable;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import plugin.paper.marketplace.offers.transctions.Transaction;
-
-import java.util.Date;
+import plugin.paper.marketplace.offers.transaction.Transaction;
 
 @DatabaseTable(tableName = "bulk_transactions")
 public class BulkTransaction extends Transaction {
@@ -13,6 +10,6 @@ public class BulkTransaction extends Transaction {
     public BulkTransaction() {
     }
     @Override
-    public void sold() {
+    public void sold(Player buyer) {
     }
 }
