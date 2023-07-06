@@ -25,7 +25,8 @@ public class DatabaseTest {
         Dao<Auction, Integer> actionDao = Database.getAuctionDao();
         Auction auction = new Auction(new ItemStack(Material.DIAMOND), UUID.randomUUID(), 100, new Date());
         actionDao.create(auction);
-        System.out.println(actionDao.queryForFirst().getId());
+        Assert.assertEquals(auction, actionDao.queryForId(auction.getId()));
+        Assert.assertEquals(auction, actionDao.queryForEq("id", auction.getId()).get(0));
     }
 
 

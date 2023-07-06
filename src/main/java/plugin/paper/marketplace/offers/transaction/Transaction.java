@@ -39,6 +39,7 @@ public abstract class Transaction {
     public Transaction(ItemStack itemStack, double price, Date endTime, UUID playerUUID) throws IOException {
         this.seller = playerUUID;
         this.Price = price;
+        //this.itemStack = itemStack.serializeAsBytes();
         this.startTime = Date.from(Instant.now());
         this.endTime = endTime;
     }
