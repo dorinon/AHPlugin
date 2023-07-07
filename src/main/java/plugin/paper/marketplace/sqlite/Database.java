@@ -5,10 +5,9 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import plugin.paper.marketplace.Ah;
 import plugin.paper.marketplace.offers.transaction.types.Auction;
 import plugin.paper.marketplace.offers.transaction.types.BulkTransaction;
-import plugin.paper.marketplace.offers.transaction.types.FixedPrice;
+import plugin.paper.marketplace.offers.transaction.types.BIN;
 
 import java.sql.SQLException;
 
@@ -16,7 +15,7 @@ public class Database {
 
     private static String url = "jdbc:sqlite:D:/Documents/dor/coding/sqlite/marketplace";
     private static Dao<Auction, Integer> auctionDao;
-    private static Dao<FixedPrice, Integer> fixedPriceDao;
+    private static Dao<BIN, Integer> fixedPriceDao;
     private static Dao<BulkTransaction, Integer> BulkDao;
 
     public static ConnectionSource getConnectionSource() {
@@ -26,7 +25,6 @@ public class Database {
     private static ConnectionSource connectionSource = null;
 
     public static void init() {
-        System.out.println(url);
         connect();
         setupTables();
     }
@@ -42,11 +40,11 @@ public class Database {
     private static void setupTables() {
         try {
             TableUtils.createTableIfNotExists(connectionSource, Auction.class);
-            TableUtils.createTableIfNotExists(connectionSource, FixedPrice.class);
+            TableUtils.createTableIfNotExists(connectionSource, BIN.class);
             TableUtils.createTableIfNotExists(connectionSource, BulkTransaction.class);
 
             auctionDao = DaoManager.lookupDao(connectionSource, Auction.class);
-            fixedPriceDao = DaoManager.lookupDao(connectionSource, FixedPrice.class);
+            fixedPriceDao = DaoManager.lookupDao(connectionSource, BIN.class);
             BulkDao = DaoManager.lookupDao(connectionSource, BulkTransaction.class);
         } catch (SQLException e) {
             throw new RuntimeException("Error setting up tables");
@@ -59,12 +57,11 @@ public class Database {
             throw new RuntimeException("Error disconnecting from database");
         }
     }
-
     public static Dao<Auction, Integer> getAuctionDao() {
         return auctionDao;
     }
 
-    public static Dao<FixedPrice, Integer> getFixedPriceDao() {
+    public static Dao<BIN, Integer> getFixedPriceDao() {
         return fixedPriceDao;
     }
 

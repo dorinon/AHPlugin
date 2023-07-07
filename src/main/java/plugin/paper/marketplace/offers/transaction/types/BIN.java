@@ -6,7 +6,7 @@ import plugin.paper.marketplace.sqlite.Database;
 
 import java.sql.SQLException;
 
-public class FixedPrice extends Transaction {
+public class BIN extends Transaction {
     @Override
     public void sold(Player buyer) {
         try {

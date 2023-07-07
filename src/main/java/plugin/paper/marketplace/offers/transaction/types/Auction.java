@@ -27,7 +27,7 @@ public class Auction extends Transaction {
 
     public Auction() {
     }
-    public Auction(ItemStack item, UUID seller, double price, Date date) throws IOException {
+    public Auction(ItemStack item, UUID seller, double price, Date date) {
         super(item, price, date, seller);
     }
 
