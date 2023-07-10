@@ -1,0 +1,27 @@
+<gui rows="6" title="My GUI" field="gui">
+    <patternpane x="0" y="0" length="9" height="6">
+        <pattern>
+            <row>322222223</row>
+            <row>100000001</row>
+            <row>100000001</row>
+            <row>100000001</row>
+            <row>100000001</row>
+            <row>100000001</row>
+        </pattern>
+        <binding char="1">
+            <item type="pink_stained_glass_pane">
+                <displayname> </displayname>
+            </item>
+        </binding>
+        <binding char="2">
+            <item type="purple_stained_glass_pane">
+                <displayname> </displayname>
+            </item>
+        </binding>
+        <binding char="3">
+            <item type="orange_stained_glass_pane">
+                <displayname> </displayname>
+            </item>
+        </binding>
+    </patternpane>
+</gui>

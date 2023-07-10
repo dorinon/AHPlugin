@@ -1,15 +1,16 @@
 package plugin.paper.marketplace;
 
-import com.samjakob.spigui.SpiGUI;
+import com.github.stefvanschie.inventoryframework.gui.type.util.Gui;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Marketplace extends JavaPlugin {
+    public static Marketplace plugin;
 
-    public static SpiGUI spigui;
     @Override
     public void onEnable() {
         // Plugin startup logic
-        spigui = new SpiGUI(this);
+        plugin = this;
+        getServer().getPluginManager().registerEvents(new plugin.paper.marketplace.listeners.PlayerShiftListener(), this);
     }
 
     @Override

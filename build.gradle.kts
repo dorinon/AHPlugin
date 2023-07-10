@@ -11,40 +11,38 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
-    maven {
-        url = uri("https://jitpack.io")
-    }
-
-    maven {
-        url = uri("https://repo.papermc.io/repository/maven-public/")
-    }
-
-    maven {
-        url = uri("https://oss.sonatype.org/content/groups/public/")
-    }
-
-    maven {
-        url = uri("https://repo.maven.apache.org/maven2/")
-    }
+    mavenCentral()
+    maven("https://jitpack.io")
+    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://oss.sonatype.org/content/groups/public/")
+    maven("https://repo.maven.apache.org/maven2/")
 }
 
 dependencies {
     testImplementation("junit:junit:4.13.1")
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.9.0-RC")
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
-    shadow("com.samjakob:SpiGUI:1.3")
     implementation("net.ricecode:string-similarity:1.0.0")
     implementation("com.j256.ormlite:ormlite-jdbc:6.1")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0-RC")
     implementation("org.xerial:sqlite-jdbc:3.42.0.0")
-    implementation("io.papermc.paper:paper-api:1.20-R0.1-SNAPSHOT")
+    implementation ("com.github.stefvanschie.inventoryframework:IF:0.10.11")
+    compileOnly("io.papermc.paper:paper-api:1.20-R0.1-SNAPSHOT")
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir("src/main/resources")
+        }
+    }
 }
 
 group = "plugin.paper"
 version = "1.0-SNAPSHOT"
-description = "ah"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+description = "marketplace"
+java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
 
 publishing {
     publications.create<MavenPublication>("maven") {

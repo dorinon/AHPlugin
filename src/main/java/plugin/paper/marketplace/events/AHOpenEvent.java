@@ -1,4 +1,4 @@
-package plugin.paper.marketplace.events.ah;
+package plugin.paper.marketplace.events;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
@@ -6,13 +6,13 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class AHCloseEvent extends Event implements Cancellable {
+public class AHOpenEvent extends Event implements Cancellable {
 
     private boolean isCancelled;
     private final Player player;
     private static final HandlerList handlers = new HandlerList();
 
-    public AHCloseEvent(Player player) {
+    public AHOpenEvent(Player player) {
         this.player = player;
 
         isCancelled  = false;
@@ -41,4 +41,3 @@ public class AHCloseEvent extends Event implements Cancellable {
         return player;
     }
 }
-

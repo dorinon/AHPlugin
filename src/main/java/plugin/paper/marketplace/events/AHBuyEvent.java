@@ -1,4 +1,4 @@
-package plugin.paper.marketplace.events.ah;
+package plugin.paper.marketplace.events;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
